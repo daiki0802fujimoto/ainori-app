@@ -29,4 +29,8 @@ class PostController extends Controller
         $post->fill($input)->save();
         return redirect('/posts/' . $post->id);
     }
+    public function chat(Post $post)
+    {
+        return view('posts.chat')->with(['post' => $post]);
+    }
 }

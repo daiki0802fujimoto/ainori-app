@@ -17,7 +17,7 @@
         <div class='posts'>
             @foreach ($posts as $post)
                 <div class='post' style="border: 2px solid #000; margin: 10px 30px 10px;">
-                    <h3 class='chat'>
+                    <h3 class='show'>
                         <a href="/posts/{{ $post->id }}">この投稿で相乗りする</a>
                     </h3>
                     <span class='user'>投稿者：{{ $post->user->name }}</span>

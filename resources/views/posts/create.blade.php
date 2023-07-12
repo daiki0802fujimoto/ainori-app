@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
+        <title>Create</title>
     </head>
     <body>
         <div class="back">[<a href="/">戻る</a>]</div>
