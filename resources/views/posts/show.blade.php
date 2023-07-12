@@ -9,7 +9,8 @@
     </head>
     <body>
         <div class="content">
-            <div class="content__post">
+            <div class="content__post" style="border: 2px solid #000;">
+                <span class='user'>投稿者：{{ $post->user->name }}</span>
                 <span class='origin'>出発地：{{ $post->origin }}</span>
                 <span class='destination'>目的地：{{ $post->destination }}</span>
                 <span class='people'>最大人数：{{ $post->people }}</span>
