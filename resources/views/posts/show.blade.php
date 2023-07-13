@@ -7,22 +7,28 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
-    <body>
-        <div class="content">
-            <div class="content__post" style="border: 2px solid #000;">
-                <span class='user'>投稿者：{{ $post->user->name }}</span>
-                <span class='origin'>出発地：{{ $post->origin }}</span>
-                <span class='destination'>目的地：{{ $post->destination }}</span>
-                <span class='people'>最大人数：{{ $post->people }}</span>
-                <span class='time_zone'>時間帯：{{ $post->time_zone }}</span>
-                <span class='comment'>コメント：{{ $post->comment }}</span>   
+    <x-app-layout>
+        <x-slot name="header">
+            show
+        </x-slot>
+        <body>
+            <div class="content">
+                <div class="content__post" style="border: 2px solid #000; margin: 10px 30px 10px;">
+                    <small style="margin-left: 20px">{{ $post->user->name }}</small>
+                    <span class='user' style="margin-left: 20px">投稿者：{{ $post->user->name }}</span>
+                    <span class='origin' style="margin-left: 20px">出発地：{{ $post->origin }}</span>
+                    <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
+                    <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
+                    <span class='time_zone' style="margin-left: 20px">時間帯：{{ $post->time_zone }}</span>
+                    <span class='comment' style="margin-left: 20px">コメント：{{ $post->comment }}</span>   
+                </div>
             </div>
-        </div>
-        <h1 class="chat">
-            チャット画面
-        </h1>
-        <div class="footer">
-            <a href="/">戻る</a>
-        </div>
-    </body>
+            <h1 class="chat">
+                チャット画面
+            </h1>
+            <div class="footer">
+                <a href="/">戻る</a>
+            </div>
+        </body>
+    </x-app-layout>
 </html>

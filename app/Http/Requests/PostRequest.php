@@ -15,7 +15,7 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'post.user_id' => 'required|integer|',
+            // 'post.user_id' => 'required|integer|',
             'post.origin' => 'required|string|max:40',
             'post.destination' => 'required|string|max:40',
             'post.people' => 'required|integer|max:3',
