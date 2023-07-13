@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('image', 100)->nullable();
             $table->integer('age');
-            $table->boolean('sex'); 
+            $table->foreignId('sex_id')->constrained(); 
             $table->dateTime('last_login_at')->nullable(); 
             $table->dateTime('last_logout_at')->nullable();
             $table->rememberToken();

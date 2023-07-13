@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'hogehoge@gmail.com',
             'password' => 'hogehoge',
             'age' => 25,
-            'sex' => true,
+            'sex_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'email' => 'piyopiyo@gmail.com',
             'password' => 'piyopiyo',
             'age' => 30,
-            'sex' => false,
+            'sex_id' => 2,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'email' => 'hogepiyo@gmail.com',
             'password' => 'hogepiyo',
             'age' => 50,
-            'sex' => true,
+            'sex_id' => 3,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
