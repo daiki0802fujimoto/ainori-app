@@ -14,6 +14,7 @@
         <body>
             <div class="content">
                 <div class="content__post" style="border: 2px solid #000; margin: 10px 30px 10px;">
+                    <small style="margin-left: 20px">{{ $post->user->sex_id }}</small>
                     <small style="margin-left: 20px">{{ $post->user->name }}</small>
                     <span class='user' style="margin-left: 20px">投稿者：{{ $post->user->name }}</span>
                     <span class='origin' style="margin-left: 20px">出発地：{{ $post->origin }}</span>
