@@ -24,10 +24,10 @@
                     <span class='comment' style="margin-left: 20px">コメント：{{ $post->comment }}</span>   
                 </div>
             </div>
-            <h1 class="chat">
-                チャット画面
-            </h1>
-            <div class="footer">
+            <div style="text-align: center; color: red;">
+                <a href="/posts/chats/{{ $post->id }}">【チャットへ参加する】</a>
+            </div>
+            <div class="footer" style="margin-left: 20px">
                 <a href="/">戻る</a>
             </div>
         </body>

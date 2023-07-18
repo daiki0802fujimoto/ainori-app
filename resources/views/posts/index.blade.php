@@ -14,16 +14,16 @@
             <h1 style="text-align: center;">相乗りマッチング</h1>
             <h2 style="text-align: center;">相乗りを募集したい方はこちら</h2>
             <!--<a href='/posts/create'>相乗りを募集する</a>-->
-            <div style="text-align: center;">
-                <button type=“button” onclick="location.href='/posts/create'" style="width: 10em; height: 3em;">募集する</button>
+            <div style="text-align: center;  color: red;">
+                <button type=“button” onclick="location.href='/posts/create'" style="width: 10em; height: 3em;">【募集する】</button>
             </div>
-            <h2 style="text-align: center;">募集中の投稿</h2>
+            <h2 style="margin-left: 20px;">募集中の投稿</h2>
             <div class='posts'>
                 @foreach ($posts as $post)
                     <div class='post' style="border: 2px solid #000; margin: 10px 30px 10px;">
-                        <h3 class='chat' style="margin-left: 10px">
+                        <div class='chat' style="margin-left: 10px; color: red;">
                             <a href="/posts/{{ $post->id }}">この投稿で相乗りする</a>
-                        </h3>
+                        </div>
                         <span class='user' style="margin-left: 20px;">投稿者：{{ $post->user->name }}</span>
                         <span class='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
                         <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
