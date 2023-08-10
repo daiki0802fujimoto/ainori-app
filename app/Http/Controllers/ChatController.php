@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Chat;
 use Illuminate\Http\Request;
 use App\Library\Message;   // for new Message;
 use App\Events\MessageSent; // for MessageSent::dispatch()
@@ -15,21 +16,30 @@ class ChatController extends Controller
         $this->middleware('auth');
     }
 
-    public function chat(Post $post)
+    public function chat(Post $post, Chat $chat)
     {
-        return view('chats.chat')->with(['post' => $post]);
+        return view('chats.chat')->with(['post' => $post, 'chats' => $chat->get()]);
     }
     
     // メッセージ送信時の処理
-    public function sendMessage( Request $request )
+    public function sendMessage(Chat $chat, Request $request)
     {
+        
+        $input = $request['chat'];
+        $input['user_id'] = $request->user()->id;
+        $input['post_id'] = $request->input('post_id');
+        $chat->fill($input)->save();
+        // return redirect('/posts/chats/' . $post->id);
+        
+        
+        
         // auth()->user() : 現在認証しているユーザーを取得
         $user = auth()->user();
         $strUsername = $user->name;
         
         // リクエストからデータの取り出し
-        $strMessage = $request->input('message');
-        
+        $strMessage = $request->input('chat')['message'];
+
         // メッセージオブジェクトの作成と公開メンバー設定
         $message = new Message;
         $message->username = $strUsername;
@@ -45,7 +55,8 @@ class ChatController extends Controller
         //broadcast( new MessageSent($message))->toOthers();
         
         //return ['message' => $strMessage];
-        return $request;
+        // return $request;
+        return redirect()->back();
     }
 }
 

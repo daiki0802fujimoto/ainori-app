@@ -25,11 +25,28 @@
                 </div>
             </div>
             <div style="text-align: center; color: red;">
-                <a href="/posts/chats/{{ $post->id }}">【チャットへ参加する】</a>
+                <button id="number">{{ $post->people }}</button>
+                <a href="/posts/chats/{{ $post->id }}" id="up">【チャットへ参加する】</a>
             </div>
             <div class="footer" style="margin-left: 20px">
                 <a href="/">戻る</a>
             </div>
+            
+            <script>
+                const number = document.getElementById('number');
+                const upbutton = document.getElementById('number');
+                const post = @json($post);
+                
+                let count = 0;
+                
+                upbutton.addEventListener('click', () => {
+                    if(post.people - count){
+                        console.log(post)
+                        count ++; 
+                        number.innerHTML = post.people - count;
+                    }
+                });
+            </script>
         </body>
     </x-app-layout>
 </html>

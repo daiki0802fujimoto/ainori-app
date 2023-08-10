@@ -6,9 +6,7 @@
     </head>
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Chat
-            </h2>
+            Chat
         </x-slot>
         
         <div class="content">
@@ -23,6 +21,7 @@
                 <span class='comment' style="margin-left: 20px">コメント：{{ $post->comment }}</span>   
             </div>
         </div>
+        <a href="/posts/{{ $post->id }}">【戻る】</a>
         
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -30,8 +29,10 @@
                     <div class="p-6 bg-white border-b border-gray-200">
     
         <small style="margin-left: 20px">ホスト：{{ $post->user->name }}</small>
+        <small style="margin-left: 20px">ポストID：{{ $post->id }}</small>
         <div class="footer" style="margin-bottom: 40px; margin-left: 10px; color: red;">
-            <a href="/">【チャット部屋を退出する】</a>
+            <!--<a href="javascript:history.back()">[戻る]</a>-->
+            <a href="/">【参加を辞める】</a>
         </div>
         
         {{-- エンターキーによるボタン押下を行うために、
@@ -40,11 +41,29 @@
              onsubmitの設定の最後に"return false;"を追加。
              (return false;の結果として、submitが中断され、ページリロードは行われない。）--}}
         <ul class="list-disc" id="list_message">
+            @foreach ($chats as $chat)
+                @if($chat->post_id === $post->id)
+                    <li>
+                        <strong>{{ $chat->user->name }}</strong>
+                        <small>{{ $chat->created_at }}</small>
+                        <div style="margin: 10px 10px 10px 10px; border: 1px solid #afadad; border-radius: 5px; width: fit-content; padding: 5px 10px;">
+                            {{ $chat->message }}
+                        </div>
+                    </li>
+                @endif
+            @endforeach
         </ul>
         
-        <form method="post" action="" onsubmit="onsubmit_Form(); return false;">
-            メッセージ : <input type="text" id="input_message" autocomplete="off" />
-            <button type="submit" class="text-white bg-blue-700 px-5 py-2">送信</button>
+        
+        <!--type="text" name="post[title]" placeholder="タイトル"-->
+        <!--<form method="POST" action="/posts/chats" onsubmit="onsubmit_Form(); return false;">-->
+        <form method="POST" action=""　onsubmit="onsubmit_Form(); return false;">
+            @csrf
+            <span>
+                <input type="text" id="input_message" name="chat[message]" placeholder="メッセージを入力" autocomplete="off" style="width: 500px; height: 30px;"/>
+            </span>
+            <input type="hidden" name="post_id" value="{{ $post->id }}">
+            <input type="submit" class="text-white bg-blue-700 px-4 py-1" value="送信"/>
         </form>
     
                     </div>
@@ -89,7 +108,6 @@
                 {{-- Listen開始と、イベント発生時の処理の定義 --}}
                 window.Echo.private('taxi_matching').listen( 'MessageSent', (e) =>
                 {
-                    console.log(e);
                     {{-- メッセージの整形 --}}
                     let strUsername = e.message.username;
                     let strMessage = e.message.body;
@@ -100,7 +118,6 @@
 				                now.getDate() + "/" + 
 				                now.getHours() + ":" + 
 				                now.getMinutes(); 
-                    console.log(time)
     
                     {{-- 拡散されたメッセージをメッセージリストに追加 --}}
                     let elementLi = document.createElement( "li" );

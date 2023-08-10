@@ -24,6 +24,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
 Route::controller(App\Http\Controllers\ChatController::class)->middleware(['auth'])->group(function(){
     Route::get('/posts/chats/{post}', 'chat')->name('chat');
     Route::post('/posts/chats/{post}', 'sendMessage')->name('sendMessage');
+    // Route::post('/chat', [App\Http\Controllers\ChatController::class, 'sendMessage']);
 });
 
 Route::middleware('auth')->group(function () {
