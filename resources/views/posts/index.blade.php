@@ -13,10 +13,30 @@
         <body>
             <h1 style="text-align: center;">相乗りマッチング</h1>
             <h2 style="text-align: center;">相乗りを募集したい方はこちら</h2>
-            <!--<a href='/posts/create'>相乗りを募集する</a>-->
             <div style="text-align: center;  color: red;">
                 <button type=“button” onclick="location.href='/posts/create'" style="width: 10em; height: 3em;">【募集する】</button>
             </div>
+            <span>出発地で検索する</span>
+            <span>
+                <input type="text" id="input_message" placeholder="出発地を入力" autocomplete="off" style="width: 200px; height: 30px;"/>
+            </span>
+            <span>目的地で検索する</span>
+            <span>
+                <input type="text" id="input_message" placeholder="目的地を入力" autocomplete="off" style="width: 200px; height: 30px;"/>
+            </span>
+            
+            <form method="GET" action="">
+                <input type="search" placeholder="出発地を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
+                <div>
+                    <button type="submit">検索</button>
+                    <button>
+                        <a href="/" class="text-white">
+                            クリア
+                        </a>
+                    </button>
+                </div>
+            </form>
+            
             <h2 style="margin-left: 20px;">募集中の投稿</h2>
             <div class='posts'>
                 @foreach ($posts as $post)
