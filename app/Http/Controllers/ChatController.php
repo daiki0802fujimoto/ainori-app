@@ -39,6 +39,7 @@ class ChatController extends Controller
         
         // リクエストからデータの取り出し
         $strMessage = $request->input('chat')['message'];
+        // $strMessage = $request->input('message');
 
         // メッセージオブジェクトの作成と公開メンバー設定
         $message = new Message;

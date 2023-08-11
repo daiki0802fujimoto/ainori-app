@@ -16,25 +16,19 @@
             <div style="text-align: center;  color: red;">
                 <button type=“button” onclick="location.href='/posts/create'" style="width: 10em; height: 3em;">【募集する】</button>
             </div>
-            <span>出発地で検索する</span>
-            <span>
-                <input type="text" id="input_message" placeholder="出発地を入力" autocomplete="off" style="width: 200px; height: 30px;"/>
-            </span>
-            <span>目的地で検索する</span>
-            <span>
-                <input type="text" id="input_message" placeholder="目的地を入力" autocomplete="off" style="width: 200px; height: 30px;"/>
-            </span>
             
-            <form method="GET" action="">
-                <input type="search" placeholder="出発地を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
-                <div>
-                    <button type="submit">検索</button>
+            <form method="GET" action="/">
+                @csrf
+                <input type="search" placeholder="出発地を入力" name="search[origin]" style="width: 200px; height: 30px; margin-left: 20px;" value="@if (isset($originSearch)) {{ $originSearch }} @endif">
+                <input type="search" placeholder="目的地を入力" name="search[destination]" style="width: 200px; height: 30px; margin-left: 20px;" value="@if (isset($destinationSearch)) {{ $destinationSearch }} @endif">
+                <span>
+                    <button type="submit" style="color: blue;">検索</button>
                     <button>
-                        <a href="/" class="text-white">
+                        <a href="/" style="color: red;">
                             クリア
                         </a>
                     </button>
-                </div>
+                </span>
             </form>
             
             <h2 style="margin-left: 20px;">募集中の投稿</h2>
