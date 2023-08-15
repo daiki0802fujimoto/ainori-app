@@ -16,9 +16,13 @@ Route::get('/dashboard', function () {
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('index');
+    Route::get('/myposts', 'myposts')->name('myposts');
     Route::post('/posts', 'store')->name('store');
     Route::get('/posts/create', 'create')->name('create');
     Route::get('/posts/{post}', 'show')->name('show');
+    Route::get('/myposts/{post}/edit', 'edit')->name('edit');
+    Route::put('/myposts/{post}', 'update')->name('update');
+    Route::delete('/myposts/{post}', 'delete')->name('delete');
 });
 
 Route::controller(App\Http\Controllers\ChatController::class)->middleware(['auth'])->group(function(){
