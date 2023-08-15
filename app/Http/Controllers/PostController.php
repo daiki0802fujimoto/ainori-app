@@ -47,6 +47,27 @@ class PostController extends Controller
         
         return view('posts.index')->with(['posts' => $posts, 'originSearch' => $originSearch, 'destinationSearch' => $destinationSearch]);
     }
+    public function myposts(Post $post)
+    {
+        return view('posts.myposts')->with(['posts' => $post->getPaginateByLimit()]);
+    }
+    public function edit(Post $post)
+    {
+        return view('posts.edit')->with(['post' => $post]);
+    }
+    public function update(PostRequest $request, Post $post)
+    {
+        $input_post = $request['post'];
+        $input_post += ['user_id' => $request->user()->id];
+        $post->fill($input_post)->save();
+    
+        return redirect('/myposts');
+    }
+    public function delete(Post $post)
+    {
+        $post->delete();
+        return redirect('/myposts');
+    }
 
     public function show(Post $post)
     {
