@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +15,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
+    Route::get('/admin', 'admin')->name('admin');
+    Route::get('/admin/posts', 'adminposts')->name('adminposts');
     Route::get('/', 'index')->name('index');
     Route::get('/myposts', 'myposts')->name('myposts');
     Route::post('/posts', 'store')->name('store');
@@ -23,6 +25,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/myposts/{post}/edit', 'edit')->name('edit');
     Route::put('/myposts/{post}', 'update')->name('update');
     Route::delete('/myposts/{post}', 'delete')->name('delete');
+    Route::delete('/admin/posts/{post}', 'delete')->name('delete');
 });
 
 Route::controller(App\Http\Controllers\ChatController::class)->middleware(['auth'])->group(function(){

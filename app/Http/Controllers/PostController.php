@@ -43,9 +43,41 @@ class PostController extends Controller
             }
         });
         $posts = $query->orderBy('updated_at', 'DESC')->paginate(10);
-
         
-        return view('posts.index')->with(['posts' => $posts, 'originSearch' => $originSearch, 'destinationSearch' => $destinationSearch]);
+        if ($request->user()->admin){
+            return view('admins.index')->with(['posts' => $posts, 'originSearch' => $originSearch, 'destinationSearch' => $destinationSearch]);
+        }
+        else{
+            return view('posts.index')->with(['posts' => $posts, 'originSearch' => $originSearch, 'destinationSearch' => $destinationSearch]);
+        }
+        
+        
+    }
+    public function admin(Post $post, Request $request)
+    {
+        $posts = Post::query()->paginate(20);
+        $search = $request->input('search');
+        $originSearch = $search['origin'] ?? null;
+        $destinationSearch = $search['destination'] ?? null;
+
+        // クエリビルダ
+        $query = Post::query();
+
+        $query->where(function ($query) use ($originSearch, $destinationSearch) {
+            if ($originSearch) {
+                $query->orWhere('origin', 'like', '%' . $originSearch . '%');
+            }
+            if ($destinationSearch) {
+                $query->orWhere('destination', 'like', '%' . $destinationSearch . '%');
+            }
+        });
+        $posts = $query->orderBy('updated_at', 'DESC')->paginate(10);
+        
+        return view('admins.index')->with(['posts' => $posts, 'originSearch' => $originSearch, 'destinationSearch' => $destinationSearch]);
+    }
+    public function adminposts(Post $post)
+    {
+        return view('admins.myposts')->with(['posts' => $post->getPaginateByLimit()]);
     }
     public function myposts(Post $post)
     {
@@ -63,10 +95,18 @@ class PostController extends Controller
     
         return redirect('/myposts');
     }
+    
     public function delete(Post $post)
     {
         $post->delete();
-        return redirect('/myposts');
+        if (auth()->user()->admin) {
+            // 管理者の場合の処理
+            return redirect('/admin/posts');
+        } 
+        else {
+            // 一般ユーザーの場合の処理
+            return redirect('/myposts');
+        }
     }
 
     public function show(Post $post)

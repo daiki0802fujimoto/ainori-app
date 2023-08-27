@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('admin')->default(false);
             $table->string('image', 100)->nullable();
             $table->integer('age');
             $table->foreignId('sex_id')->constrained(); 
