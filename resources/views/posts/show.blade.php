@@ -39,6 +39,12 @@
                     <div id="fare2" style="margin-left: 20px;"></div>
                     <div id="fare3" style="margin-left: 20px;"></div>
                     <div id="fare4" style="margin-left: 20px;"></div>
+                    <div>
+                        <form action="/admin/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                            @csrf
+                            <button type="button" onclick="deletePost({{ $post->id }})" style="margin-left: 10px; color: blue;">削除する</button> 
+                        </form>
+                    </div>
                 </div>
                 <div id="map" style="margin-left: 10%; height:700px; width:50%;"></div>
             </div>
