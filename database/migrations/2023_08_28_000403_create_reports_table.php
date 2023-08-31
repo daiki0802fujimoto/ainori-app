@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained(); 
+            $table->foreignId('post_id')->constrained(); 
             $table->string('report', 200);
             $table->timestamps();
             $table->softDeletes();

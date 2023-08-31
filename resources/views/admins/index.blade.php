@@ -11,12 +11,6 @@
             管理画面
         </x-slot>
         <body>
-            <div class="footer" style="margin-left: 20px">
-                <a href="/admin/posts">すべての投稿</a>
-            </div>
-            <div class="footer" style="margin-left: 20px">
-                <a href="/register">管理者登録</a>
-            </div>
             <h1 style="text-align: center;">管理画面</h1>
             <h1 style="text-align: center;">相乗りマッチング</h1>
             
@@ -41,7 +35,7 @@
                         <div class='chat' style="margin-left: 10px; color: red;">
                             <a href="/posts/{{ $post->id }}">この投稿で相乗りする</a>
                         </div>
-                        <span class='user' style="margin-left: 20px;">投稿者：{{ $post->user->name }}</span>
+                        <span class='user' style="margin-left: 20px;">投稿者：<a href="/admin/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
                         <span class='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
                         <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
                         <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>

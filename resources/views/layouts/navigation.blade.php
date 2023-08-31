@@ -16,11 +16,23 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        {{ __('Index') }}
+                        {{ __('投稿一覧') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('myposts')" :active="request()->routeIs('myposts')">
-                        {{ __('Myposts') }}
-                    </x-nav-link>
+                    @if(Auth::user()->admin)
+                        <x-nav-link :href="route('admin.report')" :active="request()->routeIs('admin.report')">
+                            {{ __('通報一覧') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                            {{ __('ユーザ一覧') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.register')" :active="request()->routeIs('admin.register')">
+                            {{ __('新規管理者登録') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('myposts')" :active="request()->routeIs('myposts')">
+                            {{ __('自分の投稿') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
