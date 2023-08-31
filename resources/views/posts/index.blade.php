@@ -38,7 +38,7 @@
                         <div class='chat' style="margin-left: 10px; color: red;">
                             <a href="/posts/{{ $post->id }}">この投稿で相乗りする</a>
                         </div>
-                        <span class='user' style="margin-left: 20px;">投稿者：{{ $post->user->name }}</span>
+                        <span class='user' style="margin-left: 20px;">投稿者：<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
                         <span class='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
                         <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
                         <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>

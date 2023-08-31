@@ -8,15 +8,13 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <x-app-layout>
-        <x-slot name="header">
-            show
-        </x-slot>
+        
         <body>
             <div class="content">
                 <div class="content__post" style="border: 2px solid #000; margin: 10px 30px 10px;">
                     <small style="margin-left: 20px">{{ $post->user->sex_id }}</small>
                     <small style="margin-left: 20px">{{ $post->user->name }}</small>
-                    <span class='user' style="margin-left: 20px">投稿者：{{ $post->user->name }}</span>
+                    <span class='user' style="margin-left: 20px">投稿者：<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
                     <span id='origin' style="margin-left: 20px">出発地：{{ $post->origin }}</span>
                     <span id='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
                     <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
@@ -39,14 +37,20 @@
                     <div id="fare2" style="margin-left: 20px;"></div>
                     <div id="fare3" style="margin-left: 20px;"></div>
                     <div id="fare4" style="margin-left: 20px;"></div>
-                    <div>
-                        <form action="/admin/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                            @csrf
-                            <button type="button" onclick="deletePost({{ $post->id }})" style="margin-left: 10px; color: blue;">削除する</button> 
-                        </form>
-                    </div>
                 </div>
                 <div id="map" style="margin-left: 10%; height:700px; width:50%;"></div>
+            </div>
+            <div style="margin-left: 30%;">
+                <form action="/reports/{{ $post->id }}" id="form_{{ $post->id }}" method="POST">
+                    @csrf
+                    <div class="report">
+                        <h2>この投稿を通報する</h2>
+                        <textarea name="post[report]" placeholder="通報理由" style="height:50px; width:50%;">{{ old('report') }}</textarea>
+                        <p class="report__error" style="color:red">{{ $errors->first('report') }}</p>
+                    </div>
+                    <!--<input type="submit" value="【募集する！】" style="text-align: center;  color: red;"/>-->
+                    <button type="button" onclick="reportPost({{ $post->id }})" style="margin-left: 10px; color: blue;">通報する</button> 
+                </form>
             </div>
             
             <script>
@@ -130,6 +134,13 @@
                     } 
                     else {
                         alert('ルートを取得できませんでした。');
+                    }
+                }
+                function reportPost(id) {
+                    'use strict'
+            
+                    if (confirm('この投稿を通報しますか？')) {
+                        document.getElementById(`form_${id}`).submit();
                     }
                 }
             </script>

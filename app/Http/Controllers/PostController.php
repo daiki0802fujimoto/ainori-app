@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Report;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\ReportRequest; 
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -75,18 +77,22 @@ class PostController extends Controller
         
         return view('admins.index')->with(['posts' => $posts, 'originSearch' => $originSearch, 'destinationSearch' => $destinationSearch]);
     }
+    
     public function adminposts(Post $post)
     {
         return view('admins.myposts')->with(['posts' => $post->getPaginateByLimit()]);
     }
+    
     public function myposts(Post $post)
     {
         return view('posts.myposts')->with(['posts' => $post->getPaginateByLimit()]);
     }
+    
     public function edit(Post $post)
     {
         return view('posts.edit')->with(['post' => $post]);
     }
+    
     public function update(PostRequest $request, Post $post)
     {
         $input_post = $request['post'];
@@ -124,6 +130,15 @@ class PostController extends Controller
         $input = $request['post'];
         $input += ['user_id' => $request->user()->id];
         $post->fill($input)->save();
+        return redirect('/myposts');
+    }
+    
+    public function report(Post $post, Report $report, ReportRequest $request)
+    {
+        $input = $request['post'];
+        $input += ['user_id' => $request->user()->id];
+        $input += ['post_id' => $post->id]; // $post->id で投稿のIDを取得
+        $report->fill($input)->save();
         return redirect('/posts/' . $post->id);
     }
 }

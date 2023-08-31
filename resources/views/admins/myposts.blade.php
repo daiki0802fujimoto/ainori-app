@@ -38,7 +38,7 @@
                                 <div class="edit"><a href="/admin/posts/{{ $post->id }}/edit">編集する</a></div>
                             </div>
                             <div>
-                                <form action="/admin/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                <form action="/admin/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" onclick="deletePost({{ $post->id }})" style="margin-left: 10px; color: blue;">削除する</button> 
