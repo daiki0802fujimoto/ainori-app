@@ -5,9 +5,6 @@
         <title>Blog</title>
     </head>
     <x-app-layout>
-        <x-slot name="header">
-            create
-        </x-slot>
         <body>
             <div style="margin-left: 20px">
                 <div class="back">[<a href="/">戻る</a>]</div>

@@ -8,7 +8,6 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <x-app-layout>
-        
         <body>
             <div class="content">
                 <div class="content__post" style="border: 2px solid #000; margin: 10px 30px 10px;">
