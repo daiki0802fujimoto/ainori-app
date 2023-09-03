@@ -7,9 +7,6 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <x-app-layout>
-        <x-slot name="header">
-            myposts
-        </x-slot>
         <body>
             <h1 style="text-align: center;">相乗りマッチング</h1>
             <h2 style="text-align: center;">相乗りを募集したい方はこちら</h2>

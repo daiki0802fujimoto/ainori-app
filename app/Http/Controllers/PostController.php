@@ -44,7 +44,7 @@ class PostController extends Controller
                 $query->orWhere('destination', 'like', '%' . $destinationSearch . '%');
             }
         });
-        $posts = $query->orderBy('updated_at', 'DESC')->paginate(10);
+        $posts = $query->orderBy('updated_at', 'DESC')->paginate(2);
         
         if ($request->user()->admin){
             return view('admins.index')->with(['posts' => $posts, 'originSearch' => $originSearch, 'destinationSearch' => $destinationSearch]);

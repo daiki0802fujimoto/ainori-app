@@ -7,9 +7,6 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <x-app-layout>
-        <x-slot name="header">
-            index
-        </x-slot>
         <body>
             <h1 style="text-align: center;">相乗りマッチング</h1>
             <h2 style="text-align: center;">相乗りを募集したい方はこちら</h2>
@@ -38,7 +35,7 @@
                         <div class='chat' style="margin-left: 10px; color: red;">
                             <a href="/posts/{{ $post->id }}">この投稿で相乗りする</a>
                         </div>
-                        <span class='user' style="margin-left: 20px;">投稿者：<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
+                        <span class='user' style="margin-left: 20px; color: blue;   ">投稿者：<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
                         <span class='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
                         <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
                         <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
@@ -48,7 +45,7 @@
                 @endforeach
             </div>
             <div class='paginate'>
-                {{ $posts->links() }}
+                {{ $posts->links('vendor.pagination.bootstrap-4') }}
             </div>
         </body>
     </x-app-layout>

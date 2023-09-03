@@ -8,7 +8,7 @@
     </head>
     <x-app-layout>
         <x-slot name="header">
-            投稿一覧
+            管理画面
         </x-slot>
         <body>
             <div class="footer" style="margin-left: 20px">
