@@ -5,10 +5,11 @@
         <title>Taxi</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <x-app-layout>
         <x-slot name="header">
-            管理画面
+            管理画面myposts()
         </x-slot>
         <body>
             <div class="footer" style="margin-left: 20px">
@@ -32,7 +33,7 @@
             <h2 style="margin-left: 20px;">募集中の投稿</h2>
             <div class='posts'>
                 @foreach ($posts as $post)
-                    <div class='post' style="border: 2px solid #000; margin: 10px 30px 10px;">
+                    <div class='post'>
                         <div class="actions" style="display: flex; margin-left: 10px;">
                             <div class='chat' style="margin-left: 10px; color: red;">
                                 <div class="edit"><a href="/admin/posts/{{ $post->id }}/edit">編集する</a></div>
@@ -45,7 +46,7 @@
                                 </form>
                             </div>
                         </div>
-                        <span class='user' style="margin-left: 20px;">投稿者：{{ $post->user->name }}</span>
+                        <span style="margin-left: 20px;">投稿者：{{ $post->user->name }}</span>
                         <span class='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
                         <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
                         <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
@@ -55,7 +56,7 @@
                 @endforeach
             </div>
             <div class='paginate'>
-                {{ $posts->links() }}
+                {{ $posts->links('vendor.pagination.tailwind-custom') }}
             </div>
             <script>
                 function deletePost(id) {

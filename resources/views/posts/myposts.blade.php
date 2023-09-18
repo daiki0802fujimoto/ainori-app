@@ -3,39 +3,33 @@
     <head>
         <meta charset="utf-8">
         <title>Taxi</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
+    <x-slot name="header">
+        管理画面
+    </x-slot>
     <x-app-layout>
-        <body>
-            <h1 style="text-align: center;">相乗りマッチング</h1>
-            <h2 style="text-align: center;">相乗りを募集したい方はこちら</h2>
-            <div style="text-align: center;  color: red;">
-                <button type=“button” onclick="location.href='/posts/create'" style="width: 10em; height: 3em;">【募集する】</button>
+        <x-slot name="header">
+            <div class="custom_header">
+                相乗りマッチング！
             </div>
-            
-            <form method="GET" action="/">
-                @csrf
-                <input type="search" placeholder="出発地を入力" name="search[origin]" style="width: 200px; height: 30px; margin-left: 20px;" value="@if (isset($originSearch)) {{ $originSearch }} @endif">
-                <input type="search" placeholder="目的地を入力" name="search[destination]" style="width: 200px; height: 30px; margin-left: 20px;" value="@if (isset($destinationSearch)) {{ $destinationSearch }} @endif">
-                <span>
-                    <button type="submit" style="color: blue;">検索</button>
-                    <button>
-                        <a href="/" style="color: red;">
-                            クリア
-                        </a>
-                    </button>
-                </span>
-            </form>
-            
-            <h2 style="margin-left: 20px;">募集中の投稿</h2>
+        </x-slot>
+        <body>
+            <div style="text-align: center; margin-top: 10px;">
+                <button class="btn btn-primary btn-lg" type=“button” onclick="location.href='/posts/create'">募集する！</button>
+            </div>
             <div class='posts'>
                 @foreach ($posts as $post)
                     @if($post->user_id == Auth::user()->id)
-                        <div class='post' style="border: 2px solid #000; margin: 10px 30px 10px;">
+                        <div class='post'>
                             <div class="actions" style="display: flex; margin-left: 10px;">
                                 <div class='chat' style="margin-left: 10px; color: red;">
                                     <div class="edit"><a href="/myposts/{{ $post->id }}/edit">編集する</a></div>
+                                </div>
+                                <div class='chat' style="margin-left: 10px; color: red;">
+                                    <button class="btn btn-primary btn-sm" type=“button” onclick="location.href='/posts/chats/{{ $post->id }}'">チャットへ</button>
+                                    <!--<div class="edit"><a href="/posts/chats/{{ $post->id }}">チャットへ</a></div>-->
                                 </div>
                                 <div>
                                     <form action="/myposts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
@@ -45,18 +39,18 @@
                                     </form>
                                 </div>
                             </div>
-                            <span class='user' style="margin-left: 20px;">投稿者：{{ $post->user->name }}</span>
+                            <span style="margin-left: 20px;">投稿者：{{ $post->user->name }}</span>
                             <span class='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
                             <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
                             <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
-                            <span class='time_zone' style="margin-left: 20px">時間帯：{{ $post->time_zone }}</span>
-                            <span class='comment' style="margin-left: 20px">コメント：{{ $post->comment }}</span>
+                            <span class='time_zone' style="margin-left: 20px">時間帯：{{ $post->time_zone->format('Y年n月j日H時i分') }}</span>
+                            <div class='comment' style="margin-left: 20px">コメント：{{ $post->comment }}</div>
                         </div>
                     @endif
                 @endforeach
             </div>
             <div class='paginate'>
-                {{ $posts->links() }}
+                {{ $posts->links('vendor.pagination.tailwind-custom') }}
             </div>
             <script>
                 function deletePost(id) {

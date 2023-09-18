@@ -5,6 +5,7 @@
         <title>Taxi</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <x-app-layout>
         <x-slot name="header">
@@ -31,11 +32,11 @@
             <h2 style="margin-left: 20px;">募集中の投稿</h2>
             <div class='posts'>
                 @foreach ($posts as $post)
-                    <div class='post' style="border: 2px solid #000; margin: 10px 30px 10px;">
+                    <div class='post'>
                         <div class='chat' style="margin-left: 10px; color: red;">
                             <a href="/posts/{{ $post->id }}">この投稿で相乗りする</a>
                         </div>
-                        <span class='user' style="margin-left: 20px;">投稿者：<a href="/admin/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
+                        <span style="margin-left: 20px;">投稿者：<a href="/admin/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
                         <span class='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
                         <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
                         <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
@@ -45,7 +46,7 @@
                 @endforeach
             </div>
             <div class='paginate'>
-                {{ $posts->links() }}
+                {{ $posts->links('vendor.pagination.tailwind-custom') }}
             </div>
         </body>
     </x-app-layout>
