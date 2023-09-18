@@ -6,27 +6,32 @@
         <title>Posts</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
     <x-app-layout>
+        <x-slot name="header">
+            <div class="custom_header">
+                相乗りマッチング！
+            </div>
+        </x-slot>
         <body>
             <div class="content">
-                <div class="content__post" style="border: 2px solid #000; margin: 10px 30px 10px;">
-                    <small style="margin-left: 20px">{{ $post->user->sex_id }}</small>
-                    <small style="margin-left: 20px">{{ $post->user->name }}</small>
-                    <span class='user' style="margin-left: 20px">投稿者：<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
-                    <span id='origin' style="margin-left: 20px">出発地：{{ $post->origin }}</span>
-                    <span id='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
-                    <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
-                    <span class='time_zone' style="margin-left: 20px">時間帯：{{ $post->time_zone }}</span>
-                    <span class='comment' style="margin-left: 20px">コメント：{{ $post->comment }}</span>   
+                <div class="post">
+                    <span style="margin-left: 20px; color: blue;">投稿者：<a href="/user/{{ $post->user_id }}">{{ $post->user->name }}</a></span>
+                    <span id='origin' style="margin-left: 20px;">出発地：{{ $post->origin }}</span>
+                    <span id='destination' style="margin-left: 20px;">目的地：{{ $post->destination }}</span>
+                    <span class='people' style="margin-left: 20px;">最大人数：{{ $post->people }}</span>
+                    <span class='time_zone' style="margin-left: 20px;">時間帯：{{ $post->time_zone->format('Y年n月j日H時i分') }}</span>
+                    <div class='comment' style="margin-left: 20px;">コメント：{{ $post->comment }}</div>   
                 </div>
             </div>
             <div class="footer" style="margin-left: 20px">
-                <a href="/">戻る</a>
+                <a class="btn btn-link btn-sm" href="/">戻る</a>
             </div>
-            <div style="margin-left: 20px; color: red;">
+            <div style="margin-left: 20px; text-align: center">
                 <button id="number">{{ $post->people }}</button>
-                <a href="/posts/chats/{{ $post->id }}" id="up">【チャットへ参加する】</a>
+                <a class="btn btn-info" href="/posts/chats/{{ $post->id }}" id="up">チャットへ参加する</a>
             </div>
             <div style="display: flex; margin-top: 20px;">
                 <div>
@@ -47,8 +52,7 @@
                         <textarea name="post[report]" placeholder="通報理由" style="height:50px; width:50%;">{{ old('report') }}</textarea>
                         <p class="report__error" style="color:red">{{ $errors->first('report') }}</p>
                     </div>
-                    <!--<input type="submit" value="【募集する！】" style="text-align: center;  color: red;"/>-->
-                    <button type="button" onclick="reportPost({{ $post->id }})" style="margin-left: 10px; color: blue;">通報する</button> 
+                    <button class="btn btn-danger btn-sm" type=“button” onclick="reportPost({{ $post->id }})">通報する</button> 
                 </form>
             </div>
             
@@ -62,28 +66,19 @@
                 var directionsService;
                 var mapObj;
                 
-
-                // googleMapsAPIを持ってくるときに,callback=initMapと記述しているため、initMap関数を作成
                 function initMap() {
                     directionsDisplay = new google.maps.DirectionsRenderer();
                     directionsService = new google.maps.DirectionsService();
-                    // welcome.blade.phpで描画領域を設定するときに、id=mapとしたため、その領域を取得し、mapに格納します。
                     var map = document.getElementById("map");
-                    // 東京タワーの緯度は35.6585769,経度は139.7454506と事前に調べておいた
-                    // let tokyoTower = {lat: 35.6585769, lng: 139.7454506};
-                    // オプションを設定
                     var opt = {
-                        zoom: 13, //地図の縮尺を指定
-                        mapTypeId: google.maps.MapTypeId.ROADMAP, //ROADMAP  道路や建物などが表示される地図
-                        // center: tokyoTower,
+                        zoom: 13,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
                     };
-                    // 地図のインスタンスを作成します。第一引数にはマップを描画する領域、第二引数にはオプションを指定
                     mapObj = new google.maps.Map(map, opt);
                     directionsDisplay.setMap(mapObj);
                     google.maps.event.addListener(directionsDisplay,'directions_changed', function(){})
                     
                     calcRoute();
-
                 }
                 
                 function calcRoute() {

@@ -5,6 +5,7 @@
         <title>Taxi</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <x-app-layout>
         <x-slot name="header">
@@ -28,30 +29,47 @@
             </form>
             
             <h2 style="margin-left: 20px;">ユーザ一覧</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>管理者</td>
+                        <td>アイコン</td>
+                        <td>ユーザネーム</td>
+                        <td>メールアドレス</td>
+                        <td>年齢</td>
+                        <td>性別</td>
+                        <td>削除</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr>
+                            @if($user->admin)
+                                <td class='admin' style="margin-left: 20px; color: red;">○</td>
+                            @else
+                                <td class='admin' style="margin-left: 20px; color: red;"></td>
+                            @endif
+                            <td class='comment' style="margin-left: 20px">{{ $user->image }}</td>
+                            <td style="margin-left: 20px;"><a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></td>
+                            <td class='origin' style="margin-left: 20px;">{{ $user->email }}</td>
+                            <!--<td class='destination' style="margin-left: 20px">：{{ $user->password }}</td>-->
+                            <td class='people' style="margin-left: 20px">{{ $user->age }}</td>
+                            <td class='time_zone' style="margin-left: 20px">{{ $user->sex->sex }}</td>
+                            <td>
+                                <form action="/admin/users/{{ $user->id }}" id="form_{{ $user->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="deleteUser({{ $user->id }})" style="margin-left: 10px; color: blue;">削除する</button> 
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
             <div class='users'>
-                @foreach ($users as $user)
-                    <div class='user' style="border: 2px solid #000; margin: 10px 30px 10px;">
-                        @if($user->admin)
-                            <span class='admin' style="margin-left: 20px; color: red;">管理者</span>
-                        @endif
-                        <span class='user' style="margin-left: 20px;">ユーザネーム：<a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></span>
-                        <span class='origin' style="margin-left: 20px;">メールアドレス：{{ $user->email }}</span>
-                        <!--<span class='destination' style="margin-left: 20px">：{{ $user->password }}</span>-->
-                        <span class='people' style="margin-left: 20px">年齢：{{ $user->age }}</span>
-                        <span class='time_zone' style="margin-left: 20px">性別：{{ $user->sex->sex }}</span>
-                        <span class='comment' style="margin-left: 20px">画像：{{ $user->image }}</span>
-                        <div>
-                            <form action="/admin/users/{{ $user->id }}" id="form_{{ $user->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" onclick="deleteUser({{ $user->id }})" style="margin-left: 10px; color: blue;">削除する</button> 
-                            </form>
-                        </div>
-                    </div>
-                @endforeach
             </div>
             <div class='paginate'>
-                {{ $users->links() }}
+                {{ $users->links('vendor.pagination.tailwind-custom') }}
             </div>
             <script>
                 function deleteUser(id) {

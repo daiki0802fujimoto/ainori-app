@@ -14,12 +14,10 @@ class Report extends Model
         'post_id',
         'report',
     ];
-     //「1対多」の関係なので単数系に
     public function post()
     {
         return $this->belongsTo(Post::class);
     }
-    //「1対多」の関係なので単数系に
     public function user()
     {
         return $this->belongsTo(User::class);
