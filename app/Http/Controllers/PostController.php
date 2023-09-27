@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Report;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\ReportRequest; 
@@ -94,6 +95,11 @@ class PostController extends Controller
     {
         return view('posts.show')->with(['post' => $post]);
     }
+    
+    public function user(Post $post, User $user)
+    {
+        return view('users.user')->with(['user' => $user, 'posts' => $post->getPaginateByLimit()]);
+    }
 
     public function create()
     {
@@ -114,6 +120,6 @@ class PostController extends Controller
         $input += ['user_id' => $request->user()->id];
         $input += ['post_id' => $post->id];
         $report->fill($input)->save();
-        return redirect('/posts/' . $post->id);
+        return back();
     }
 }

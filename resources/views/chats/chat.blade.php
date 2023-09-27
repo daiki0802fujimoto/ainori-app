@@ -13,16 +13,34 @@
             </div>
         </x-slot>
         <div class="content">
-            <div class="post">
-                <span style="margin-left: 20px">投稿者：{{ $post->user->name }}</span>
-                <span class='origin' style="margin-left: 20px">出発地：{{ $post->origin }}</span>
-                <span class='destination' style="margin-left: 20px">目的地：{{ $post->destination }}</span>
-                <span class='people' style="margin-left: 20px">最大人数：{{ $post->people }}</span>
-                <span class='time_zone' style="margin-left: 20px">時間帯：{{ $post->time_zone->format('Y年n月j日H時i分') }}</span>
-                <div class='comment' style="margin-left: 20px">コメント：{{ $post->comment }}</div>   
+            <div class='mypost' onclick="location.href='/posts/{{ $post->id }}'">
+                <div style="margin-left: 20px; color: blue; display: flex;">
+                    <span>投稿者：</span>
+                    <span><a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a></span>
+                </div>
+                <div class='origin' style="margin:0 20px; display: inline;">
+                    <span style="width: 70px;">出発地：</span>
+                    <span id="origin" style="flex: 1;">{{ $post->origin }}</span>
+                </div>
+                <div class='destination' style="margin:0 20px; display: flex;">
+                    <span style="width: 70px;">目的地：</span>
+                    <span id="destination" style="flex: 1;">{{ $post->destination }}</span>
+                </div>
+                <div class='people' style="margin:0 20px; display: flex;">
+                    <span style="width: 85px;">最大人数：</span>
+                    <span style="flex: 1;">{{ $post->people }}</span>
+                </div>
+                <div class='time_zone' style="margin:0 20px; display: flex;">
+                    <span style="width: 70px;">時間帯：</span>
+                    <span style="flex: 1;">{{ $post->time_zone->format('Y年n月j日H時i分') }}</span>
+                </div>
+                <div class='comment' style="margin:0 20px; display: flex;">
+                    <div style="width: 70px;">コメント：</div>
+                    <div style="flex: 1;">{{ $post->comment }}</div>
+                </div>
             </div>
         </div>
-        <a class="btn btn-link btn-sm" href="/posts/{{ $post->id }}">戻る</a>
+        <a class="btn btn-link btn-sm" style="margin-left: 10%;" href="/posts/{{ $post->id }}">戻る</a>
         
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -34,19 +52,19 @@
             <a class="btn btn-danger btn-sm" href="/">参加を辞める</a>
         </div>
         <div style="width: 90%; height: 500px; overflow-y: scroll;">
-            <ul class="list-disc" id="list_message">
+            <ul class="list-disc" id="list_message" style="text-align: auto">
                 @foreach ($chats as $chat)
                     @if($chat->post_id === $post->id)
                         @if($chat->user_id == Auth::user()->id)
-                            <li style="margin-left:auto;">
-                                <strong>{{ $chat->user->name }}</strong>
-                                <small>{{ $chat->created_at->format('Y/n/j/H:i:s')  }}</small>
+                            <li>
+                                <strong style="color: blue;">{{ $chat->user->name }}</strong>
+                                <small style="text-align: right;">{{ $chat->created_at->format('Y/n/j/H:i:s')  }}</small>
                                 <div class="mymessage">
                                     {{ $chat->message }}
                                 </div>
                             </li>
                         @else
-                            <li style="margin: 0 0 0 auto;">
+                            <li>
                                 <strong>{{ $chat->user->name }}</strong>
                                 <small>{{ $chat->created_at->format('Y/n/j/H:i:s')  }}</small>
                                 <div class="message">
@@ -76,10 +94,8 @@
         <script>
             const elementInputMessage = document.getElementById( "input_message" );
             
-            {{-- formのsubmit処理 --}}
             function onsubmit_Form()
             {
-                {{-- 送信用テキストHTML要素からメッセージ文字列の取得 --}}
                 let strMessage = elementInputMessage.value;
                 if( !strMessage )
                 {
@@ -87,8 +103,7 @@
                 }
     
                 params = { 'message': strMessage };
-    
-                {{-- POSTリクエスト送信処理とレスポンス取得処理 --}}
+
                 axios
                     .post( '', params )
                     .then( response => {
@@ -98,19 +113,15 @@
                         console.log(error.response)
                     } );
     
-                {{-- テキストHTML要素の中身のクリア --}}
                 elementInputMessage.value = "";
             }
             
-            {{-- ページ読み込み後の処理 --}}
             window.addEventListener( "DOMContentLoaded", ()=>
             {
                 const elementListMessage = document.getElementById( "list_message" );
                 
-                {{-- Listen開始と、イベント発生時の処理の定義 --}}
                 window.Echo.private('taxi_matching').listen( 'MessageSent', (e) =>
                 {
-                    {{-- メッセージの整形 --}}
                     let strUsername = e.message.username;
                     let strMessage = e.message.body;
                     
@@ -121,7 +132,6 @@
 				                now.getHours() + ":" + 
 				                now.getMinutes(); 
     
-                    {{-- 拡散されたメッセージをメッセージリストに追加 --}}
                     let elementLi = document.createElement( "li" );
                     let elementUsername = document.createElement( "strong" );
                     let elementNow = document.createElement( "small" );
@@ -134,8 +144,7 @@
                     elementLi.append( elementUsername );
                     elementLi.append( elementNow );
                     elementLi.append( elementMessage );
-                    //elementListMessage.prepend( elementLi );  // リストの一番上に追加
-                    elementListMessage.append( elementLi );  // リストの一番下に追加
+                    elementListMessage.append( elementLi ); 
                 });
             } );
         </script>

@@ -18,7 +18,7 @@
             </div>
             <div style="margin:auto; width: 70%;">
                 <p style="margin: 10 auto; color: red; text-align: center;">
-                    項目を修正してください
+                    ※項目を修正してください
                 </p>
                 <div class="content">
                     <form class="create_form" action="/myposts/{{ $post->id }}" method="POST">

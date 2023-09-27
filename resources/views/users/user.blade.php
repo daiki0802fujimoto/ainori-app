@@ -13,32 +13,14 @@
             </div>
         </x-slot>
         <body>
-            <div style="text-align: center; margin-top: 10px;">
-                <button class="btn btn-primary btn-lg" type=“button” onclick="location.href='/posts/create'">相乗りを募集する！</button>
-            </div>
             <div class='posts'>
-                @php
-                    $hasMatchingPosts = false;
-                @endphp
+                <h2 style="margin-top:20px; text-align: center; font-size: 20px;">{{ $user->name }}さんの投稿</h2>
                 @foreach ($posts as $post)
-                    @if($post->user_id == Auth::user()->id)
-                        <div class='mypost'>
-                            <div class="actions" style="display: flex; margin-left: 10px;">
-                                <div class='chat' style="margin-left: 10px; color: blue;">
-                                    <div class="edit"><a class="btn btn-primary btn-sm" href="/myposts/{{ $post->id }}/edit">編集する</a></div>
-                                </div>
-                                <div>
-                                    <form action="/myposts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div>
-                                            <button class="btn btn-danger btn-sm" type="button" onclick="deletePost({{ $post->id }})" style="margin-left: 10px; background-color: red;">削除する</button> 
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class='chat' style="margin-left: 10px; color: red;">
-                                    <button class="btn btn-info btn-sm" type=“button” onclick="location.href='/posts/chats/{{ $post->id }}'">チャットへ</button>
-                                </div>
+                    @if($post->user_id == $user->id)
+                        <div class='index_post' onclick="location.href='/posts/{{ $post->id }}'">
+                            <div style="margin-left: 20px; color: blue; display: flex;">
+                                <span>投稿者：</span>
+                                <span><a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a></span>
                             </div>
                             <div class='origin' style="margin:0 20px; display: inline;">
                                 <span style="width: 70px;">出発地：</span>
@@ -61,26 +43,34 @@
                                 <div style="flex: 1;">{{ $post->comment }}</div>
                             </div>
                         </div>
-                        @php
-                            $hasMatchingPosts = true;
-                        @endphp
                     @endif
                 @endforeach
-                
-                @if (!$hasMatchingPosts)
-                    <p style="text-align: center; margin-top: 10px; font-size: 20px;">まだ投稿はありません</p>
-                @endif
             </div>
             <div class='paginate'>
                 {{ $posts->links('vendor.pagination.tailwind-custom') }}
             </div>
+            <div style="margin:5% 30%;">
+                <form action="/reports/{{ $post->id }}" id="form_{{ $post->id }}" method="POST">
+                    @csrf
+                    <div class="report">
+                        <h2>このユーザを通報する</h2>
+                        <textarea name="post[report]" placeholder="通報理由" style="height:90px; width:100%;">{{ old('report') }}</textarea>
+                        <p class="report__error" style="color:red">{{ $errors->first('report') }}</p>
+                    </div>
+                     <input type="submit" class="text-white bg-red-600 rounded px-3 py-1" value="通報する" onClick="return reportPost()">
+                </form>
+            </div>
             <script>
-                function deletePost(id) {
+                function reportPost() {
                     'use strict'
-            
-                    console.log("sss");
-                    if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
-                        document.getElementById(`form_${id}`).submit();
+                    
+                    if (confirm('この投稿を通報しますか？')) {
+                        alert("送信しました");
+                        return true;
+                    }
+                    else {
+                        alert("キャンセルしました");
+                        return false;
                     }
                 }
             </script>

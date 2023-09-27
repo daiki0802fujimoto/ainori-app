@@ -16,10 +16,20 @@
     border: 2px solid green; 
     border-radius: 20px; 
     background-color: white; 
-    margin: 10px 30px 10px;
+    margin: 10px auto;
+    width: 70%;
+    max-width: 700px;
 }
 .index_post:hover {
     background-color: #CEF9DC;
+}
+.mypost{
+    border: 2px solid green; 
+    border-radius: 20px; 
+    background-color: white; 
+    margin: 10px auto;
+    width: 70%;
+    max-width: 700px;
 }
 .create_form{
     width: 80%;
@@ -36,6 +46,9 @@
     background-color: #99FFFF; 
     /*margin: 10px 30px 10px;*/
 }
+.border_bottom{
+    border-bottom: 1px solid black; 
+}
 .border_button{
     border-radius: 20px; 
     border: 2px solid black; 
@@ -45,22 +58,33 @@
     font-weight: 800;
     margin-top: 10px;
 }
-.search_clear{
-    border-radius: 20px; 
-    border: 2px solid black; 
-    background-color: white;
-    width: 3em; 
-    height: 2em; 
+
+.recruit{
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search_box{
+    margin:10px auto;
+    text-align: center; 
+}
+.search{
+    width: 20%; 
+    height: 20%; 
+    margin:0 10px;
+}
+
+.origin .destination .people .time_zone .comment{
+    display: flex;
+    margin-left: 20px;
 }
 
 .mymessage{
-    text-align: right;
-    border: 1px solid blue;
+    border: 1px solid #afadad;
     border-radius: 5px;
     width: fit-content; 
     padding: 5px 10px;
-    font-size: 7px;
-    color: blue;
+    font-size: 13px;
 }
 
 .message{
@@ -69,22 +93,25 @@
     border-radius: 5px;
     width: fit-content; 
     padding: 5px 10px;
-    font-size: 7px;
+    font-size: 13px;
 }
 
-table, td, th{
+td, th{
     border: 1px solid black;
     text-align: center;
     height: 40px;
 }
 
-table{
+.users_table{
     width: 80%;
     margin: auto; 
 }
 
-
-/*body{*/
-/*    color: #333;*/
-/*    font-size: 1.6rem;*/
-/*}*/
+.fares_table{
+    border: 1px solid black;
+    width: 80%;
+    height: 60px;
+    margin:0 10%; 
+    background-color: white;
+}
++
