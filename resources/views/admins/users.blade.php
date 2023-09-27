@@ -29,7 +29,7 @@
             </form>
             
             <h2 style="margin-left: 20px;">ユーザ一覧</h2>
-            <table>
+            <table class="users_table">
                 <thead>
                     <tr>
                         <td>管理者</td>
@@ -52,7 +52,6 @@
                             <td class='comment' style="margin-left: 20px">{{ $user->image }}</td>
                             <td style="margin-left: 20px;"><a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></td>
                             <td class='origin' style="margin-left: 20px;">{{ $user->email }}</td>
-                            <!--<td class='destination' style="margin-left: 20px">：{{ $user->password }}</td>-->
                             <td class='people' style="margin-left: 20px">{{ $user->age }}</td>
                             <td class='time_zone' style="margin-left: 20px">{{ $user->sex->sex }}</td>
                             <td>

@@ -20,6 +20,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::post('/posts', 'store')->name('store');
     Route::get('/posts/create', 'create')->name('create');
     Route::get('/posts/{post}', 'show')->name('show');
+    Route::get('/users/{user}', 'user')->name('user');
     Route::post('/reports/{post}', 'report')->name('report');
     Route::get('/myposts/{post}/edit', 'edit')->name('edit');
     Route::put('/myposts/{post}', 'update')->name('update');
@@ -32,7 +33,6 @@ Route::controller(AdminController::class)->middleware(['auth'])->group(function(
     Route::get('/admin/register', 'register')->name('admin.register');
     Route::get('/admin/report', 'report')->name('admin.report');
     Route::post('/admin/register/user', 'store')->name('admin.store');
-    Route::get('/users/{user}', 'show')->name('show');
     Route::post('/posts/{post}', 'report')->name('report');
     Route::delete('/admin/users/{user}', 'delete')->name('delete');
     Route::delete('/admin/reports/{post}', 'delete')->name('delete');

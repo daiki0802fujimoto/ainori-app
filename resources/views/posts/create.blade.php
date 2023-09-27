@@ -18,7 +18,7 @@
             </div>
             <div style="margin:auto; width: 70%;">
                 <p style="margin: 10 auto; color: red; text-align: center;">
-                    すべての項目を入力してください
+                    ※すべての項目を入力してください
                 </p>
                 <form class="create_form" action="/posts" method="POST">
                     @csrf
