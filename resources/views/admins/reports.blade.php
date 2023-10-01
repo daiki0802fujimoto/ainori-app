@@ -3,8 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Taxi</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <x-app-layout>
         <x-slot name="header">
@@ -31,9 +30,9 @@
             <div class='reports'>
                 @foreach ($reports as $report)
                     <div class='user' style="border: 2px solid #000; margin: 10px 30px 10px;">
-                        <span class='user' style="margin-left: 20px;">通報者：<a href="/admin/user/{{ $report->id }}">{{ $report->user->name }}</a></span>
+                        <span style="margin-left: 20px;">通報者：<a href="/admin/user/{{ $report->id }}">{{ $report->user->name }}</a></span>
                         <span class='origin' style="margin-left: 20px;">通報理由：{{ $report->report }}</span>
-                        <div class='user' style="margin-left: 20px;">投稿者：<a href="/admin/user/{{ $report->id }}">{{ $report->post->user->name }}</a></div>
+                        <div  style="margin-left: 20px;">投稿者：<a href="/admin/user/{{ $report->id }}">{{ $report->post->user->name }}</a></div>
                         <span class='origin' style="margin-left: 20px;">出発地：{{ $report->post->origin }}</span>
                         <span class='destination' style="margin-left: 20px">目的地：{{ $report->post->destination }}</span>
                         <span class='people' style="margin-left: 20px">最大人数：{{ $report->post->people }}</span>
@@ -50,7 +49,7 @@
                 @endforeach
             </div>
             <div class='paginate'>
-                {{ $reports->links() }}
+                {{ $reports->links('vendor.pagination.tailwind-custom') }}
             </div>
             <script>
                 function deleteUser(id) {
