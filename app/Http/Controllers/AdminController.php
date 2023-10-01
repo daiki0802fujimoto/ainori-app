@@ -22,7 +22,7 @@ class AdminController extends Controller
                 $query->orWhere('name', 'like', '%' . $username . '%');
             }
         });
-        $users = $query->orderBy('updated_at', 'DESC')->paginate(3);
+        $users = $query->orderBy('updated_at', 'DESC')->paginate(20);
         
         return view('admins.users')->with(['users' => $users, 'search' => $username]);
     }

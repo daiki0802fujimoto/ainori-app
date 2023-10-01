@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Chat;
 use Illuminate\Http\Request;
-use App\Library\Message;   // for new Message;
-use App\Events\MessageSent; // for MessageSent::dispatch()
+use App\Library\Message;
+use App\Events\MessageSent;
 
 class ChatController extends Controller
 {

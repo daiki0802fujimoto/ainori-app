@@ -24,7 +24,6 @@
  
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
-                {{-- ★日本語修正★ --}}
                 <p class="text-sm text-gray-700 leading-5">
                     表示中
                     @if ($paginator->firstItem())
@@ -73,7 +72,6 @@
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
                                     <span aria-current="page">
-                                        {{-- ★現在のページの背景色を bg-green-300に変更★ --}}
                                         <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-500 bg-green-300 border border-gray-300 cursor-default leading-5">{{ $page }}</span>
                                     </span>
                                 @else

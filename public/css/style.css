@@ -41,10 +41,8 @@
     background-color: white; 
     margin: 10px 30px 10px;
 }
-.border{
-    /*border: 2px solid green; */
+.borde{
     background-color: #99FFFF; 
-    /*margin: 10px 30px 10px;*/
 }
 .border_bottom{
     border-bottom: 1px solid black; 
@@ -114,4 +112,3 @@ td, th{
     margin:0 10%; 
     background-color: white;
 }
-+
