@@ -11,8 +11,8 @@
 
 ## 開発環境
 言語：PHP 8.0.28  
-フレームワーク：Laravel 9.52.10  
-データベース：MySQL 10.2.38
+フレームワーク：Laravel 9.52.10
+データベース：MySQL 10.2.38  
 その他：HTML, CSS, JavaScript, Bootstrap, AWS  
 
 ## 作成経緯
