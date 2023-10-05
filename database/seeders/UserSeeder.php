@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'テスト',
             'email' => 'test@test.com',
             'password' => Hash::make('hogehoge'),
-            'age' => 20,
+            'age' => 21,
             'sex_id' => 3,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
