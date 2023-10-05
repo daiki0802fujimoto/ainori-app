@@ -11,29 +11,24 @@ use DateTime;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'test',
+            'name' => 'テスト',
             'email' => 'test@test.com',
             'password' => Hash::make('hogehoge'),
-            'age' => 25,
+            'age' => 20,
             'sex_id' => 3,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'daiki0802fujimoto@gmail.com',
-            'password' => Hash::make('admin'),
+            'name' => '管理者',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('piyopiyo'),
             'admin' => true,
-            'age' => 23,
-            'sex_id' => 1,
+            'age' => 30,
+            'sex_id' => 3,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

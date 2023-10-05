@@ -1,66 +1,51 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# アプリケーション名
+「ainori」
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## アプリケーション概要
+相乗りして安い料金でタクシーを利用したい人同士をマッチングさせるアプリケーションです。
 
-## About Laravel
+## テスト用アカウント
+メールアドレス：test@test.com  
+パスワード：hogehoge  
+アカウント名「test」としてログインすることが可能です。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 開発環境
+言語：PHP 8.0.28  
+フレームワーク：Laravel 9.52.10  
+データベース：MySQL 10.2.38
+その他：HTML, CSS, JavaScript, Bootstrap, AWS  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 作成経緯
+作成者は電車とバスを利用して通学しています。通学で日常的によくあることが、電車が遅延してしまうとバスの出発時間に間に合わず、結果的に大学に到着する時間が遅れてしまうというものです。  
+バスを利用せずに通学する手段としては、駅からタクシーを利用するということが考えられます。しかし、タクシーはバスと比較して料金が高く、金銭的に余裕のない学生にとってはとくに利用しがたいものです。この悩みを抱いている人は作成者だけではないと考えています。　　  
+タクシーを安く利用する方法としては、複数人で相乗りし、一人当たりの料金を減らすことが考えられます。
+そこで、相乗りすることで安い料金でタクシーを利用できるようにするために、同じ目的地に行きたい人同士をマッチングさせるアプリケーションを開発しようと考え、作成に至りました。
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 機能一覧
 
-## Learning Laravel
+- 出発地、目的地で検索
+- 募集一覧ページから募集の投稿が可能
+- 募集詳細ページにはおおよその料金や距離、「Google map」でルートを表示
+- 募集ごとのオープンチャットによりユーザ同士で相談、情報共有も可
+- 募集詳細ページ、ユーザページから管理者へ通報が可能
+- マイページにて自分の投稿の編集や削除が可能
+- 各ユーザごとの募集投稿の閲覧が可能
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 機能詳細
+### 出発地、目的地検索
+既存のアプリケーションとの差別化ポイントの1つです。従来のアプリでは募集投稿に検索機能がなく、自分と同じ場所へ行きたい人の募集を探しにくい問題がありました。
+そこで、募集一覧ページにて出発地、目的地によるキーワード検索を可能にしました。出発地と目的地で検索することで相乗りが可能な募集を探しやすくなります。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+###募集詳細ページ
+募集一覧ページから各募集の詳細ページを見ることができます。
+出発地や目的地、ルートを把握するためにGoogle mapは必須であると考えました。投稿の際に入力された出発地と目的地から、「Google Maps API」により地点が登録され、詳細ページにマップとルートが表示されます。
+また、ユーザが知りたい情報として、ルートからおおよその距離、移動時間、人数当たりの料金を算出し表示させました。
 
-## Laravel Sponsors
+### チャットページ
+特に「非同期処理」に力を入れました。　　
+ユーザ同士がスムーズなやり取りができるように「Pusher」を使用しました。また、複数人でやり取りするためにチャットルームはオープンにしました。  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### ログイン機能・マイページ
+アプリケーションを利用するためにはログインが必要です。また、自分が投稿した内容はマイページにて管理されています。もし投稿を編集、削除したくなった場合は、マイページにて可能です。また、募集一覧ページ等の他のユーザ名をクリックすることでそのユーザの募集投稿を閲覧できます。
