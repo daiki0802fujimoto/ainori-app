@@ -1,7 +1,7 @@
-[![Ainori Image](https://github.com/daiki0802fujimoto/ainori-app/assets/128199162/6cd41805-f890-463b-8238-1d37c0bfbddd)](https://ainori-c52dc2b6596a.herokuapp.com/)
+<p align="center"><img src="https://github.com/daiki0802fujimoto/ainori-app/assets/128199162/6cd41805-f890-463b-8238-1d37c0bfbddd" width="400"></p>
 
 # アプリケーション名
-「ainori」
+「<a href="https://ainori-c52dc2b6596a.herokuapp.com/" target="_blank">ainori</a>」
 
 ## アプリケーション概要
 相乗りして安い料金でタクシーを利用したい人同士をマッチングさせるアプリケーションです。
