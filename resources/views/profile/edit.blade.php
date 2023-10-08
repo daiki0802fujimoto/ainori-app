@@ -9,7 +9,8 @@
     <x-app-layout>
         <x-slot name="header">
             <div class="custom_header">
-                相乗りマッチング！
+                <p style="font-size: 20px;">相乗りマッチング！</p>
+                <p>ainori</p>
             </div>
         </x-slot>
     

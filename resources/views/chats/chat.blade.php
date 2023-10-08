@@ -9,7 +9,8 @@
     <x-app-layout>
         <x-slot name="header">
             <div class="custom_header">
-                相乗りマッチング！
+                <p style="font-size: 20px;">相乗りマッチング！</p>
+                <p>ainori</p>
             </div>
         </x-slot>
         <div class="content">
@@ -58,7 +59,7 @@
                         @if($chat->user_id == Auth::user()->id)
                             <li>
                                 <strong style="color: blue;">{{ $chat->user->name }}</strong>
-                                <small style="text-align: right;">{{ $chat->created_at->format('Y/n/j/H:i:s')  }}</small>
+                                <small style="text-align: right;">{{ $chat->created_at->format('Y/n/j/H:i')  }}</small>
                                 <div class="mymessage">
                                     {{ $chat->message }}
                                 </div>
@@ -66,7 +67,7 @@
                         @else
                             <li>
                                 <strong>{{ $chat->user->name }}</strong>
-                                <small>{{ $chat->created_at->format('Y/n/j/H:i:s')  }}</small>
+                                <small>{{ $chat->created_at->format('Y/n/j/H:i')  }}</small>
                                 <div class="message">
                                     {{ $chat->message }}
                                 </div>
@@ -138,7 +139,6 @@
                     let elementMessage = document.createElement( "div" );
                     elementUsername.textContent = strUsername;
                     elementNow.textContent = time;
-                    elementNow.style.cssText = "margin-left: 20px;";
                     elementMessage.textContent = strMessage;
                     elementMessage.classList.add("message");
                     elementLi.append( elementUsername );

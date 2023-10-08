@@ -7,7 +7,9 @@
     </head>
     <x-app-layout>
         <x-slot name="header">
-            管理画面
+            <div class="custom_header">
+                管理画面
+            </div>
         </x-slot>
         <body>
             <h1 style="text-align: center;">管理画面</h1>

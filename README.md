@@ -1,3 +1,5 @@
+<p align="center"><a href="https://ainori-c52dc2b6596a.herokuapp.com/" target="_blank"><img src="https://github.com/daiki0802fujimoto/ainori-app/assets/128199162/a69cb95a-a484-4a39-aa70-7878b9be6ae2" width="400"></a></p>
+
 # アプリケーション名
 「ainori」
 
@@ -30,22 +32,27 @@
 - 募集詳細ページ、ユーザページから管理者へ通報が可能
 - マイページにて自分の投稿の編集や削除が可能
 - 各ユーザごとの募集投稿の閲覧が可能
+- 管理者画面でユーザや募集投稿、通報の管理
 
 
 ## 機能詳細
 ### 出発地、目的地検索
+<p align ="center"><img src=https://github.com/daiki0802fujimoto/ainori-app/assets/128199162/029a637a-5a71-43ec-90d2-0523abaded1a width="400"></p>
 既存のアプリケーションとの差別化ポイントの1つです。従来のアプリでは募集投稿に検索機能がなく、自分と同じ場所へ行きたい人の募集を探しにくい問題がありました。
 そこで、募集一覧ページにて出発地、目的地によるキーワード検索を可能にしました。出発地と目的地で検索することで相乗りが可能な募集を探しやすくなります。
 
 ### 募集詳細ページ
+<p align ="center"><img src=https://github.com/daiki0802fujimoto/ainori-app/assets/128199162/5fe3fe3a-291e-4ab4-8b2a-c9d35817ce79 width="400"></p>
 募集一覧ページから各募集の詳細ページを見ることができます。
 出発地や目的地、ルートを把握するためにGoogle mapは必須であると考えました。投稿の際に入力された出発地と目的地から、「Google Maps API」により地点が登録され、詳細ページにマップとルートが表示されます。
 また、ユーザが知りたい情報として、ルートからおおよその距離、移動時間、人数当たりの料金を算出し表示させました。
 
 ### チャットページ
+<p align ="center"><img src=https://github.com/daiki0802fujimoto/ainori-app/assets/128199162/3d1857e0-cd7a-44ab-a320-4b55fbc05bc3 width="400"></p>
 特に「非同期処理」に力を入れました。
 ユーザ同士がスムーズなやり取りができるように「Pusher」を使用しました。また、複数人でやり取りするためにチャットルームはオープンにしました。  
 
 
 ### ログイン機能・マイページ
+<p align ="center"><img src=https://github.com/daiki0802fujimoto/ainori-app/assets/128199162/20993595-0407-4d16-8132-36158a24ca4d width="400"></p>
 アプリケーションを利用するためにはログインが必要です。また、自分が投稿した内容はマイページにて管理されています。もし投稿を編集、削除したくなった場合は、マイページにて可能です。また、募集一覧ページ等の他のユーザ名をクリックすることでそのユーザの募集投稿を閲覧できます。

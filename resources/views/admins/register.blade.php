@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        管理画面
+        <div class="custom_header">
+            管理画面
+        </div>
     </x-slot>
     <x-guest-layout>
         <form method="POST" action="{{ route('admin.store') }}">
