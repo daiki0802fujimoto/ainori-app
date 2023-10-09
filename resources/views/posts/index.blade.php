@@ -57,7 +57,7 @@
                             <span style="flex: 1;">{{ $post->time_zone->format('Y年n月j日H時i分') }}</span>
                         </div>
                         <div class='comment' style="margin:0 20px; display: flex;">
-                            <div style="width: 70px;">コメント：</div>
+                            <div style="width: 80px;">コメント：</div>
                             <div style="flex: 1;">{{ $post->comment }}</div>
                         </div>
                     </div>
