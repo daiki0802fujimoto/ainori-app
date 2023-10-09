@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+body {
+　　font-feature-settings: "palt";
+　　letter-spacing: 1px;
+　　font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+
 .custom_header{
     color: red; 
     text-align: center;
